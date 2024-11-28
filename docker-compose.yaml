@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "madhupdevops/node-app:v2"
+    image: "aniket035/node-app:latest"
     ports:
       - "8000:8000"
