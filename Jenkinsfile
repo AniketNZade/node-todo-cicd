@@ -1,55 +1,24 @@
-@Library("Shared_lib@main") _
-
 pipeline {
     agent any
     
     stages {
-
-        stage("Clean WorkSpace"){
-            steps{
-                script{
-                    cleanWs()
-                }
-            }
-        }
         
-        stage("Code checkout"){
+        stage("code"){
             steps{
-                script{
-                    code_checkout("https://github.com/DevMadhup/node-todo-cicd.git","master")
-                }
+                git url: "https://github.com/Amitabh-DevOps/Jenkins-CI-CD-Project-Todo-node-app.git", branch: "master"
+                echo 'Bhaiya code clone hogaya'
             }
         }
-
-        stage("Code checkout"){
+        stage("build and test"){
             steps{
-                script{
-                    owasp_dependency()
-                }
+                sh "docker build -t node-app ."
+                echo 'Code build done'
             }
         }
-        
-        stage("Build Docker image"){
+        stage("deploy"){
             steps{
-                script{
-                        docker_build("node-app","v1","madhupdevops")  
-                }
-            }
-        }
-
-        stage("Push Docker image"){
-            steps{
-                script{
-                        docker_push("node-app","v1","madhupdevops")  
-                }
-            }
-        }
-
-        stage("Docker Artifacts Cleanup"){
-            steps{
-                script{
-                        docker_cleanup("node-app","v1","madhupdevops")  
-                }
+                sh "docker-compose down && docker-compose up -d --build"
+                echo 'Deployment also done'
             }
         }
     }
