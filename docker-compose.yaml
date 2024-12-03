@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: aniket035/nodeapp
+    image: aniket035/nodeapp:latest
     ports:
       - "8050:8050"
