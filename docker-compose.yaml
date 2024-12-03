@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: aniket035/node-app
+    image: aniket035/Node-app
     ports:
-      - "8000:8000"
+      - "8050:8050"
