@@ -11,7 +11,7 @@ pipeline {
         }
         stage("build and test"){
             steps{
-                sh "docker build -t Node-app ."
+                sh "docker build -t nodeapp ."
                 echo 'Code build done'
             }
         }
@@ -22,8 +22,8 @@ pipeline {
                     usernameVariable:"dockerHubUser", 
                     passwordVariable:"dockerHubPass")]){
                 sh 'echo $dockerHubPass | docker login -u $dockerHubUser --password-stdin'
-                sh "docker image tag Node-app:latest ${env.dockerHubUser}/Node-app:latest"
-                sh "docker push ${env.dockerHubUser}/Node-app:latest"
+                sh "docker image tag nodeapp:latest ${env.dockerHubUser}/nodeapp:latest"
+                sh "docker push ${env.dockerHubUser}/nodeapp:latest"
                 }
             }
         }
